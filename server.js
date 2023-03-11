@@ -19,7 +19,7 @@ app.get("/:id", function (req, res) {
   fs.readFile(__dirname + "/" + "userData.json", "utf8", (err, data) => {
     let users = JSON.parse(data);
     let userId = req.params.id.replace(":", "");
-    let user = users[`user${userId}`];
+    let user = users[`user_${userId}`];
     res.json({
       data: user,
     });
@@ -40,7 +40,7 @@ app.post("/addUser", function (req, res) {
       },
     };
     let obj = JSON.parse(data);
-    obj[`user${id}`] = newUser["user"];
+    obj[`user_${id}`] = newUser["user"];
     result = JSON.stringify(obj);
     fs.writeFile(
       __dirname + "/" + "userData.json",
@@ -59,7 +59,7 @@ app.post("/addUser", function (req, res) {
 app.delete("/deleteUser", function (req, res) {
   fs.readFile(__dirname + "/" + "userData.json", "utf8", (err, data) => {
     let users = JSON.parse(data);
-    delete users[`user${req.body.id}`];
+    delete users[`user_${req.body.id}`];
     result = JSON.stringify(users);
     fs.writeFile(
       __dirname + "/" + "userData.json",
@@ -76,5 +76,5 @@ app.delete("/deleteUser", function (req, res) {
 });
 
 app.listen(3000, function () {
-  console.log("Example app listening on 3000 port");
+  console.log("Unit1 listening on 3000 port");
 });
